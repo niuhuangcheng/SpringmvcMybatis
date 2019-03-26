@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+  	namespace:配置名称空间,以前版本可选，新版本是必须填写，目的是使用长的完全限定名来隔离语句
+
+  	1。完全限定名（比如“com.sky.pojo.User”）将被直接查找并且找到即用。
+    2。短名称（比如“user”）如果全局唯一也可以作为一个单独的引用。如果不唯一，有两个或两个以上的相同名称
+            （比如“com.sky.user ”和“com.bar.user”），那么使用时就会收到错误报告说短名称是不唯一的，
+            这种情况下就必须使用完全限定名。
+   -->
+<mapper namespace="com.nhc.maven.batis.pojo.User">
+    <resultMap id="BaseResultMap" type="com.nhc.maven.batis.pojo.User">
+        <id column="user_id" jdbcType="INTEGER" property="userId" />
+        <id column="user_name" jdbcType="VARCHAR" property="userName"/>
+        <id column="password" jdbcType="VARCHAR" property="password" />
+        <id column="phone" jdbcType="VARCHAR" property="phone"/>
+    </resultMap>
+
+    <select id="queryAllUser"  resultMap="BaseResultMap">
+        select * from t_user;
+    </select>
+    <insert id="insert" parameterType="com.nhc.maven.batis.pojo.User">
+        INSERT INTO  t_user (user_id,user_name,password,phone)
+        VALUES (#{userId,jdbcType=INTEGER},#{userName,jdbcType=VARCHAR}
+        ,#{password,jdbcType=VARCHAR},#{phone,jdbcType=VARCHAR})
+    </insert>
+    <update id="updateByPrimaryKey" parameterType="com.nhc.maven.batis.pojo.User">
+        UPDATE t_user set user_name=#{userName,jdbcType=VARCHAR},
+        password=#{password,jdbcType=VARCHAR},
+        phone=#{phone,jdbcType=VARCHAR}
+        where user_id = #{userId,jdbcType=VARCHAR}
+    </update>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+
+        SELECT * FROM t_user WHERE  user_id = #{userId,jdbcType=INTEGER}
+
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        DELETE FROM  t_user WHERE  user_id = #{userId,jdbcType =INTEGER}
+    </delete>
+
+    <select id="selectByName" parameterType="java.lang.String" resultMap="BaseResultMap">
+        SELECT  * FROM t_user WHERE user_name like '%${value}%'
+
+    </select>
+
+
+
+
+
+</mapper>

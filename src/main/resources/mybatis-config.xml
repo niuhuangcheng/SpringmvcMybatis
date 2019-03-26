@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration   PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!--加载数据库连接的配置信息文件-->
+    <properties resource="dbinfo.properties"></properties>
+    <!--配置开发环境连接数据库的信息-->
+    <environments default="development">
+        <environment id="development">
+            <!--配置JDBC进行事务控制，由mybatis进行管理
+         通俗的话来说：直接使用JDBC的提交和回滚设置，它依赖于从数据源得到的连接来管理事务作用域-->
+            <transactionManager type="jdbc"></transactionManager>
+            <!-- 配置数据源，采用mybatis连接池 -->
+            <dataSource type="pooled">
+                <property name="driver" value="${jdbc.driverClass}"></property>
+                <property name="url" value="${jdbc.jdbcUrl}"></property>
+                <property name="username" value="${jdbc.user}"></property>
+                <property name="password" value="${jdbc.password}"></property>
+            </dataSource>
+        </environment>
+    </environments>
+    <!--加载实体类的映射文件-->
+    <mappers>
+        <mapper resource="com/nhc/maven/batis/mapper/User.xml"></mapper>
+    </mappers>
+</configuration>

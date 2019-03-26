@@ -1,0 +1,35 @@
+<!DOCTYPE web-app PUBLIC
+        "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+        "http://java.sun.com/dtd/web-app_2_3.dtd" >
+<web-app>
+    <display-name>Archetype Created Web Application</display-name>
+    <servlet>
+        <servlet-name>dispatcherServlet</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <!--指定springmvc.xml配置-->
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>classpath:springmvc.xml</param-value>
+        </init-param>
+        <!--load-on-startup 元素标记容器是否应该在web应用程序启动的时候就加载这个servlet，(实例化并调用其init()方法)。
+        值越小，servlet的优先级越高，就越先被加载。值相同时，容器就会自己选择顺序来加载。-->
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>dispatcherServlet</servlet-name>
+        <!--springmvc中映射地址说明
+                  /* 表示拦截所有，包括jsp,css,servlet等等。。。 不建议使用
+                  /完整名称： 只拦截当前名称的请求
+                  *.do或者*.action只拦截以do或者action结尾的请求，经常用
+                  /:拦截所有，不拦截jsp。Spring MVC建议使用的-->
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+    <!--<error-page>-->
+        <!--<error-code>404</error-code>-->
+        <!--<location>/user/error</location>-->
+    <!--</error-page>-->
+    <!--<error-page>-->
+        <!--<error-code>500</error-code>-->
+        <!--<location>/user/error</location>-->
+    <!--</error-page>-->
+</web-app>
